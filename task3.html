@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 3 - Event Propagation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+    #outer { padding: 40px; background: lightblue; }
+    #middle { padding: 30px; background: lightgreen; }
+    #inner { padding: 20px; background: lightcoral; }
+    button { margin-top: 20px; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Event Bubbling Demo</h1>
+  <p>Click inside the colored boxes and check the console</p>
+
+  <!-- Nested structure -->
+  <div id="outer">
+    Outer Div
+    <div id="middle">
+      Middle Div
+      <div id="inner">
+        Inner Div
+        <button id="stop-btn">Click me - stopPropagation</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const outer = document.getElementById('outer');
+    const middle = document.getElementById('middle');
+    const inner = document.getElementById('inner');
+    const stopBtn = document.getElementById('stop-btn');
+
+    // Attach click listeners to each div
+    // This demonstrates BUBBLING: click inner -> middle -> outer
+    outer.addEventListener('click', () => {
+      console.log("Outer Div was clicked");
+    });
+
+    middle.addEventListener('click', () => {
+      console.log("Middle Div was clicked");
+    });
+
+    inner.addEventListener('click', () => {
+      console.log("Inner Div was clicked");
+    });
+
+    // Button that stops propagation
+    stopBtn.addEventListener('click', (event) => {
+      // stopPropagation() prevents the event from bubbling up to parent elements
+      // So only "Button clicked" will log, not Inner/Middle/Outer
+      event.stopPropagation(); 
+      console.log("Button was clicked - propagation stopped!");
+    });
+
+    /* 
+      COMMENT: 
+      Event bubbling means when you click the inner div, 
+      the event "bubbles up" and triggers listeners on parent divs too.
+      stopPropagation() stops that bubbling. 
+      Without it, clicking the button would log all 4 messages.
+      With it, only the button's message logs.
+    */
+  </script>
+</body>
+</html>

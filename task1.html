@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 1 - DOM Explorer</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <!-- Required elements -->
+  <h1 id="main-heading">Welcome to DOM Explorer</h1>
+  <p id="para1">This is the first paragraph.</p>
+  <p id="para2">This is the second paragraph.</p>
+  <button id="add-btn">Add New Paragraph</button>
+
+  <script>
+    // a. Select each element and log it to the console
+    const heading = document.getElementById('main-heading');
+    const para1 = document.getElementById('para1');
+    const para2 = document.getElementById('para2');
+    const button = document.getElementById('add-btn');
+
+    console.log("Heading:", heading);
+    console.log("Paragraph 1:", para1);
+    console.log("Paragraph 2:", para2);
+    console.log("Button:", button);
+
+    // b. Change the heading text when the page loads
+    window.addEventListener('load', () => {
+      heading.textContent = "DOM Explorer - Page Loaded!";
+    });
+
+    // c. Add a new paragraph to the page when the button is clicked
+    button.addEventListener('click', () => {
+      const newPara = document.createElement('p'); // create new p element
+      newPara.textContent = "This paragraph was added by JavaScript!";
+      document.body.appendChild(newPara); // add to page
+    });
+  </script>
+</body>
+</html>
